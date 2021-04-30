@@ -47,6 +47,11 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
+         // バリデーション
+        $request->validate([
+            'content' => 'required|max:255',
+        ]);
+
          // タスクを作成
         $task = new Task;
         $task->content = $request->content;
