@@ -49,7 +49,7 @@ class TaskController extends Controller
     {
          // バリデーション
         $request->validate([
-            'tusks' => 'required|max:10',   
+            'status' => 'required|max:10',   
             'content' => 'required|max:255',
         ]);
 
@@ -88,6 +88,7 @@ class TaskController extends Controller
      */
     public function edit($id)
     {
+        
           // idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
 
@@ -108,7 +109,7 @@ class TaskController extends Controller
     {
          // バリデーション
         $request->validate([
-            'tusks' => 'required|max:10',   
+            'status' => 'required|max:10',   
             'content' => 'required|max:255',
         ]);
          // idの値でタスクを検索して取得
