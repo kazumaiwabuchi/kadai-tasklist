@@ -34,7 +34,7 @@
      @else
         <div class="center jumbotron">
             <div class="text-center">
-                <h1>Tasklistへようこそ</h1>
+                <h1>Tasklist</h1>
                 {{-- ユーザ登録ページへのリンク --}}
                 {!! link_to_route('signup.get', '今すぐ登録する', [], ['class' => 'btn btn-lg btn-primary']) !!}
             </div>
