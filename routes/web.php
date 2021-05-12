@@ -11,6 +11,12 @@
 |
 */
 
+//ユーザ登録//各アクションはトレイトに定義されてる
+Route::get('signup', 'Auth\RegisterController@showRegistrationForm')->name('signup.get');
+Route::post('signup', 'Auth\RegisterController@register')->name('signup.post');
+
+//トップページ
 Route::get('/', 'TaskController@index');
 
+//基本７アクションの省略形
 Route::resource('tasks', 'TaskController');
