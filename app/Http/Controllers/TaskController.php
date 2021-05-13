@@ -15,13 +15,22 @@ class TaskController extends Controller
      */
     public function index()
     {
-          // メッセージ一覧を取得
-        $tasks = Task::paginate(25);
+        $data = [];//空のデータを作成
+        if (\Auth::check()) { // 認証済みの場合
+            // 認証済みユーザを取得
+            $user = \Auth::user();
+          // 認証済みユーザのタスク一覧を取得
+            $tasks = $user->tasks()->orderBy('created_at', 'desc')->paginate(25);
+            
+            $data=[
+                "user" => $user,
+                "tasks" => $tasks,
+            ];
+        }
+        
 
-        // メッセージ一覧ビューでそれを表示
-        return view('tasks.index', [
-            'tasks' => $tasks,
-        ]);
+        // タスク一覧ビューでdataを表示,認証済みユーザで無ければ空データが渡される
+        return view('tasks.index', $data);
     }
 
     /**
