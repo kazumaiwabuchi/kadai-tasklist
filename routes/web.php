@@ -23,5 +23,8 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 //トップページ
 Route::get('/', 'TaskController@index');
 
-//基本７アクションの省略形
-Route::resource('tasks', 'TaskController');
+//認証付きルーティング
+Route::group(['middleware' => ['auth']], function () {
+    //７つの基本ルーティング省略形
+    Route::resource('tasks', 'TaskController');
+});
