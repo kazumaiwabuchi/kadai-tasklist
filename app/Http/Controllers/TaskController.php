@@ -144,8 +144,11 @@ class TaskController extends Controller
     {
          // idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
-        // タスクを削除
-        $task->delete();
+        // 認証済みユーザ（閲覧者）がその投稿の所有者である場合は、投稿を削除
+        if (\Auth::id() === $task->user_id) {
+            $task->delete();
+        }
+        
 
         // トップページへリダイレクトさせる
         return redirect('/');
