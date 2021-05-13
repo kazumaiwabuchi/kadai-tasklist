@@ -33,7 +33,7 @@ class TaskController extends Controller
     {
          $task = new Task;
 
-        // メッセージ作成ビューを表示
+        // タスク作成ビューを表示
         return view('tasks.create', [
             'task' => $task,
         ]);
@@ -52,13 +52,13 @@ class TaskController extends Controller
             'status' => 'required|max:10',   
             'content' => 'required|max:255',
         ]);
-
-         // タスクを作成
-        $task = new Task;
-        $task->status = $request->status;    
-        $task->content = $request->content;
-        $task->save();
-
+        
+        // 認証済みユーザ（閲覧者）の投稿として作成（リクエストされた値をもとに作成）
+        $request->user()->tasks()->create([
+            "status" => $request->status,
+            'content' => $request->content,
+        ]);
+        
         // トップページへリダイレクトさせる
         return redirect('/');
     }
